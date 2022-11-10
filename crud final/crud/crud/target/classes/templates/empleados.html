@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" xmlns:th="http:/www.thymeleaf.org"> <!-- ponemos la dirección del thymeleaf -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+    <title>Empleados</title>
+</head>
+<body>
+
+<main>
+    <div class="px-4 py-5 my-2 text-center">
+        <h1 class="display-5 fw-bold mb-4">Empleados</h1>
+        <div class="d-flex justify-content-center gap-3">
+
+
+            <div th:each="empleados:${empleados}"  class="card" style="width: 18rem;">
+                <img src="img/grupo.png" class="d-block mx-auto my-5 mb-4" alt="Usuario" height="100">
+                <div class="card-body">
+                    <h5 th:text="${empleados.nombre}"  class="card-title"></h5>
+                    <p  th:text="${empleados.documentoIdentidad}"   class="card-text"></p>
+                    <p  th:text="${empleados.correo}"   class="card-text"></p>
+                    <p  th:text="${empleados.cargo}"   class="card-text"></p>
+
+                    <div class="d-flex gap-1 justify-content-center">
+                        <form th:action="@{/empleados/{id}(id=${empleados.documentoIdentidad})}" th:method="get">
+                            <button type="submit" class="btn btn-primary">Editar</button>
+                        </form>
+                        <form th:action="@{/empleados/{id}(id=${empleados.documentoIdentidad})}" th:method="delete">
+                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="px-4 py-5 my-5 text-center">
+            <a href="/empleados/nuevo" type="button" class="btn btn-primary btn-lg px-5 gap-3">Crear Empleado</a>
+
+        </div>
+
+    </div>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+</body>
+</html>
